@@ -10,6 +10,8 @@ Navigate to the main directory using your terminal and type
 
 Your project will run on "localhost:3000"
 
+The output will be visible in the Terminal of your application.
+
 # Future improvements
 
 1. More test cases will be added
