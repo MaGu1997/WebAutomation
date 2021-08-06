@@ -8,8 +8,6 @@ Navigate to the main directory using your terminal and type
 1. npm install
 2. npm test
 
-Your project will run on "localhost:3000"
-
 The output will be visible in the Terminal of your application.
 
 # Future improvements
