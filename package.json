@@ -1,0 +1,30 @@
+{
+  "name": "webdriver-automation",
+  "version": "1.0.0",
+  "description": "This is Automation using webdriverio and chai",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio wdio.conf.js "
+  },
+  "author": "Manish Gurbani",
+  "license": "",
+  "devDependencies": {
+    "@types/node": "^16.4.12",
+    "@wdio/local-runner": "^7.9.0",
+    "@wdio/mocha-framework": "^7.9.0",
+    "@wdio/spec-reporter": "^7.9.0",
+    "@wdio/types": "^7.8.0",
+    "chai": "^4.3.4",
+    "chai-webdriverio": "^1.0.0",
+    "chromedriver": "^92.0.1",
+    "local-runner": "^0.1.1-alpha",
+    "wdio-chromedriver-service": "^7.2.0",
+    "webdriverio": "^7.9.0"
+  },
+  "dependencies": {
+    "@wdio/cli": "^7.9.0",
+    "@wdio/sync": "^7.9.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^3.0.0"
+  }
+}

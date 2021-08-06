@@ -1,0 +1,1855 @@
+2021-08-06T00:30:56.186Z WARN @wdio/utils:shim: You are running tests with @wdio/sync which will be discontinued starting Node.js v16.Read more on https://github.com/webdriverio/webdriverio/discussions/6702
+2021-08-06T00:30:57.491Z INFO @wdio/local-runner: Run worker command: run
+2021-08-06T00:30:58.111Z INFO webdriver: Initiate new session using the WebDriver protocol
+2021-08-06T00:30:58.240Z INFO webdriver: [POST] http://localhost:9515/session
+2021-08-06T00:30:58.240Z INFO webdriver: DATA {
+  capabilities: {
+    alwaysMatch: { browserName: 'chrome', acceptInsecureCerts: true },
+    firstMatch: [ {} ]
+  },
+  desiredCapabilities: { browserName: 'chrome', acceptInsecureCerts: true }
+}
+2021-08-06T00:30:59.259Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:30:59.260Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:30:59.393Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:30:59.513Z INFO webdriver: COMMAND navigateTo("http://www.ctqatest.biz/ecom/customer/account/login/")
+2021-08-06T00:30:59.514Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/url
+2021-08-06T00:30:59.514Z INFO webdriver: DATA { url: 'http://www.ctqatest.biz/ecom/customer/account/login/' }
+2021-08-06T00:31:06.258Z INFO webdriver: COMMAND getTitle()
+2021-08-06T00:31:06.259Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/title
+2021-08-06T00:31:06.269Z INFO webdriver: RESULT Customer Login
+2021-08-06T00:31:06.271Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:06.272Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:06.276Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:06.279Z INFO webdriver: COMMAND findElement("css selector", "#email")
+2021-08-06T00:31:06.280Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:06.280Z INFO webdriver: DATA { using: 'css selector', value: '#email' }
+2021-08-06T00:31:06.293Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '72202d8b-8226-4541-851b-489f071c2895'
+}
+2021-08-06T00:31:06.304Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:06.304Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:06.304Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '72202d8b-8226-4541-851b-489f071c2895',
+      ELEMENT: '72202d8b-8226-4541-851b-489f071c2895'
+    }
+  ]
+}
+2021-08-06T00:31:06.315Z INFO webdriver: RESULT true
+2021-08-06T00:31:06.316Z INFO webdriver: COMMAND elementClear("72202d8b-8226-4541-851b-489f071c2895")
+2021-08-06T00:31:06.316Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/72202d8b-8226-4541-851b-489f071c2895/clear
+2021-08-06T00:31:06.358Z INFO webdriver: COMMAND elementSendKeys("72202d8b-8226-4541-851b-489f071c2895", "test@test.com")
+2021-08-06T00:31:06.358Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/72202d8b-8226-4541-851b-489f071c2895/value
+2021-08-06T00:31:06.358Z INFO webdriver: DATA { text: 'test@test.com' }
+2021-08-06T00:31:06.429Z INFO webdriver: COMMAND findElement("css selector", "#pass")
+2021-08-06T00:31:06.429Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:06.429Z INFO webdriver: DATA { using: 'css selector', value: '#pass' }
+2021-08-06T00:31:06.443Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'd0c3462f-3ce2-41e0-ad29-6c7386112030'
+}
+2021-08-06T00:31:06.448Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:06.449Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:06.449Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': 'd0c3462f-3ce2-41e0-ad29-6c7386112030',
+      ELEMENT: 'd0c3462f-3ce2-41e0-ad29-6c7386112030'
+    }
+  ]
+}
+2021-08-06T00:31:06.460Z INFO webdriver: RESULT true
+2021-08-06T00:31:06.461Z INFO webdriver: COMMAND elementClear("d0c3462f-3ce2-41e0-ad29-6c7386112030")
+2021-08-06T00:31:06.461Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/d0c3462f-3ce2-41e0-ad29-6c7386112030/clear
+2021-08-06T00:31:06.497Z INFO webdriver: COMMAND elementSendKeys("d0c3462f-3ce2-41e0-ad29-6c7386112030", "ThisIs@T3st")
+2021-08-06T00:31:06.497Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/d0c3462f-3ce2-41e0-ad29-6c7386112030/value
+2021-08-06T00:31:06.497Z INFO webdriver: DATA { text: 'ThisIs@T3st' }
+2021-08-06T00:31:06.571Z INFO webdriver: COMMAND findElement("css selector", "#send2")
+2021-08-06T00:31:06.571Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:06.571Z INFO webdriver: DATA { using: 'css selector', value: '#send2' }
+2021-08-06T00:31:06.584Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '1fee22a0-0e50-4672-8f6b-da0aa5ded476'
+}
+2021-08-06T00:31:06.587Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:06.587Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:06.587Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '1fee22a0-0e50-4672-8f6b-da0aa5ded476',
+      ELEMENT: '1fee22a0-0e50-4672-8f6b-da0aa5ded476'
+    }
+  ]
+}
+2021-08-06T00:31:06.596Z INFO webdriver: RESULT true
+2021-08-06T00:31:06.597Z INFO webdriver: COMMAND elementClick("1fee22a0-0e50-4672-8f6b-da0aa5ded476")
+2021-08-06T00:31:06.597Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/1fee22a0-0e50-4672-8f6b-da0aa5ded476/click
+2021-08-06T00:31:07.717Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:07.717Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:07.723Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:07.724Z INFO webdriver: COMMAND findElement("css selector", ".messages .error-msg li")
+2021-08-06T00:31:07.724Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:07.724Z INFO webdriver: DATA { using: 'css selector', value: '.messages .error-msg li' }
+2021-08-06T00:31:07.738Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'da4ba177-74bb-4db9-9ced-e3b7a3da5b05'
+}
+2021-08-06T00:31:07.742Z INFO webdriver: COMMAND getElementText("da4ba177-74bb-4db9-9ced-e3b7a3da5b05")
+2021-08-06T00:31:07.742Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/da4ba177-74bb-4db9-9ced-e3b7a3da5b05/text
+2021-08-06T00:31:07.760Z INFO webdriver: RESULT Invalid login or password.
+2021-08-06T00:31:07.762Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:07.762Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:07.768Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:07.770Z INFO webdriver: COMMAND navigateTo("http://www.ctqatest.biz/ecom/customer/account/login/")
+2021-08-06T00:31:07.770Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/url
+2021-08-06T00:31:07.770Z INFO webdriver: DATA { url: 'http://www.ctqatest.biz/ecom/customer/account/login/' }
+2021-08-06T00:31:08.449Z INFO webdriver: COMMAND findElement("css selector", "#email")
+2021-08-06T00:31:08.449Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.449Z INFO webdriver: DATA { using: 'css selector', value: '#email' }
+2021-08-06T00:31:08.460Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '855bd771-0107-4190-bb1f-b011a2f0bd07'
+}
+2021-08-06T00:31:08.464Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:08.464Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:08.464Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '855bd771-0107-4190-bb1f-b011a2f0bd07',
+      ELEMENT: '855bd771-0107-4190-bb1f-b011a2f0bd07'
+    }
+  ]
+}
+2021-08-06T00:31:08.472Z INFO webdriver: RESULT true
+2021-08-06T00:31:08.472Z INFO webdriver: COMMAND elementClear("855bd771-0107-4190-bb1f-b011a2f0bd07")
+2021-08-06T00:31:08.472Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/855bd771-0107-4190-bb1f-b011a2f0bd07/clear
+2021-08-06T00:31:08.508Z INFO webdriver: COMMAND elementSendKeys("855bd771-0107-4190-bb1f-b011a2f0bd07", "")
+2021-08-06T00:31:08.508Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/855bd771-0107-4190-bb1f-b011a2f0bd07/value
+2021-08-06T00:31:08.508Z INFO webdriver: DATA { text: '' }
+2021-08-06T00:31:08.546Z INFO webdriver: COMMAND findElement("css selector", "#pass")
+2021-08-06T00:31:08.547Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.547Z INFO webdriver: DATA { using: 'css selector', value: '#pass' }
+2021-08-06T00:31:08.555Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '2ca4cef3-5b65-4520-9948-ad83ccb8af30'
+}
+2021-08-06T00:31:08.561Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:08.562Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:08.562Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '2ca4cef3-5b65-4520-9948-ad83ccb8af30',
+      ELEMENT: '2ca4cef3-5b65-4520-9948-ad83ccb8af30'
+    }
+  ]
+}
+2021-08-06T00:31:08.571Z INFO webdriver: RESULT true
+2021-08-06T00:31:08.571Z INFO webdriver: COMMAND elementClear("2ca4cef3-5b65-4520-9948-ad83ccb8af30")
+2021-08-06T00:31:08.571Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/2ca4cef3-5b65-4520-9948-ad83ccb8af30/clear
+2021-08-06T00:31:08.609Z INFO webdriver: COMMAND elementSendKeys("2ca4cef3-5b65-4520-9948-ad83ccb8af30", "")
+2021-08-06T00:31:08.609Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/2ca4cef3-5b65-4520-9948-ad83ccb8af30/value
+2021-08-06T00:31:08.609Z INFO webdriver: DATA { text: '' }
+2021-08-06T00:31:08.652Z INFO webdriver: COMMAND findElement("css selector", "#send2")
+2021-08-06T00:31:08.653Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.653Z INFO webdriver: DATA { using: 'css selector', value: '#send2' }
+2021-08-06T00:31:08.663Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '3dc7ec1f-6a14-42db-bf70-0fc889d4f0c9'
+}
+2021-08-06T00:31:08.666Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:08.667Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:08.667Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '3dc7ec1f-6a14-42db-bf70-0fc889d4f0c9',
+      ELEMENT: '3dc7ec1f-6a14-42db-bf70-0fc889d4f0c9'
+    }
+  ]
+}
+2021-08-06T00:31:08.674Z INFO webdriver: RESULT true
+2021-08-06T00:31:08.675Z INFO webdriver: COMMAND elementClick("3dc7ec1f-6a14-42db-bf70-0fc889d4f0c9")
+2021-08-06T00:31:08.675Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/3dc7ec1f-6a14-42db-bf70-0fc889d4f0c9/click
+2021-08-06T00:31:08.723Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:08.723Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:08.728Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:08.729Z INFO webdriver: COMMAND findElement("css selector", "#advice-required-entry-email")
+2021-08-06T00:31:08.729Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.729Z INFO webdriver: DATA { using: 'css selector', value: '#advice-required-entry-email' }
+2021-08-06T00:31:08.748Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '0b760fd4-8d12-4524-b954-92ed7f7fa119'
+}
+2021-08-06T00:31:08.751Z INFO webdriver: COMMAND getElementText("0b760fd4-8d12-4524-b954-92ed7f7fa119")
+2021-08-06T00:31:08.751Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/0b760fd4-8d12-4524-b954-92ed7f7fa119/text
+2021-08-06T00:31:08.768Z INFO webdriver: RESULT This is a required field.
+2021-08-06T00:31:08.769Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:08.769Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:08.774Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:08.775Z INFO webdriver: COMMAND findElement("css selector", "#advice-required-entry-pass")
+2021-08-06T00:31:08.775Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.775Z INFO webdriver: DATA { using: 'css selector', value: '#advice-required-entry-pass' }
+2021-08-06T00:31:08.789Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '3f4bb26b-ec03-4bf8-b599-683de189f2a1'
+}
+2021-08-06T00:31:08.792Z INFO webdriver: COMMAND getElementText("3f4bb26b-ec03-4bf8-b599-683de189f2a1")
+2021-08-06T00:31:08.792Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/3f4bb26b-ec03-4bf8-b599-683de189f2a1/text
+2021-08-06T00:31:08.812Z INFO webdriver: RESULT This is a required field.
+2021-08-06T00:31:08.813Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:08.814Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:08.818Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:08.818Z INFO webdriver: COMMAND findElement("css selector", "#nav > ol > li.level0.nav-5.parent > a")
+2021-08-06T00:31:08.819Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.819Z INFO webdriver: DATA {
+  using: 'css selector',
+  value: '#nav > ol > li.level0.nav-5.parent > a'
+}
+2021-08-06T00:31:08.832Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ff7902d6-ccc6-481b-82e7-5f9698fe0e25'
+}
+2021-08-06T00:31:08.836Z INFO webdriver: COMMAND getElementRect("ff7902d6-ccc6-481b-82e7-5f9698fe0e25")
+2021-08-06T00:31:08.837Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/ff7902d6-ccc6-481b-82e7-5f9698fe0e25/rect
+2021-08-06T00:31:08.847Z INFO webdriver: RESULT { height: 30, width: 85, x: 647.0125122070312, y: 206.8000030517578 }
+2021-08-06T00:31:08.848Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:08.848Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:08.848Z INFO webdriver: DATA {
+  script: 'return (function () {\n' +
+    '        return { scrollX: this.pageXOffset, scrollY: this.pageYOffset };\n' +
+    '    }).apply(null, arguments)',
+  args: []
+}
+2021-08-06T00:31:08.854Z INFO webdriver: RESULT { scrollX: 0, scrollY: 0 }
+2021-08-06T00:31:08.854Z INFO webdriver: COMMAND performActions(<object>)
+2021-08-06T00:31:08.855Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/actions
+2021-08-06T00:31:08.855Z INFO webdriver: DATA {
+  actions: [
+    {
+      type: 'pointer',
+      id: 'finger1',
+      parameters: [Object],
+      actions: [Array]
+    }
+  ]
+}
+2021-08-06T00:31:08.883Z INFO webdriver: COMMAND releaseActions()
+2021-08-06T00:31:08.883Z INFO webdriver: [DELETE] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/actions
+2021-08-06T00:31:08.888Z INFO webdriver: COMMAND findElement("css selector", "#nav > ol > li.level0.nav-5.parent > ul > li.level1.view-all > a")
+2021-08-06T00:31:08.888Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.888Z INFO webdriver: DATA {
+  using: 'css selector',
+  value: '#nav > ol > li.level0.nav-5.parent > ul > li.level1.view-all > a'
+}
+2021-08-06T00:31:08.903Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '479b5c02-5fd5-4a03-929e-50355b55b280'
+}
+2021-08-06T00:31:08.908Z INFO webdriver: COMMAND getElementText("479b5c02-5fd5-4a03-929e-50355b55b280")
+2021-08-06T00:31:08.909Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/479b5c02-5fd5-4a03-929e-50355b55b280/text
+2021-08-06T00:31:08.925Z INFO webdriver: RESULT View All Sale
+2021-08-06T00:31:08.926Z INFO webdriver: COMMAND findElement("css selector", "#nav > ol > li.level0.nav-5.parent > a")
+2021-08-06T00:31:08.926Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.926Z INFO webdriver: DATA {
+  using: 'css selector',
+  value: '#nav > ol > li.level0.nav-5.parent > a'
+}
+2021-08-06T00:31:08.937Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ff7902d6-ccc6-481b-82e7-5f9698fe0e25'
+}
+2021-08-06T00:31:08.939Z INFO webdriver: COMMAND getElementRect("ff7902d6-ccc6-481b-82e7-5f9698fe0e25")
+2021-08-06T00:31:08.939Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/ff7902d6-ccc6-481b-82e7-5f9698fe0e25/rect
+2021-08-06T00:31:08.949Z INFO webdriver: RESULT { height: 30, width: 85, x: 647.0125122070312, y: 206.8000030517578 }
+2021-08-06T00:31:08.949Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:08.949Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:08.950Z INFO webdriver: DATA {
+  script: 'return (function () {\n' +
+    '        return { scrollX: this.pageXOffset, scrollY: this.pageYOffset };\n' +
+    '    }).apply(null, arguments)',
+  args: []
+}
+2021-08-06T00:31:08.955Z INFO webdriver: RESULT { scrollX: 0, scrollY: 0 }
+2021-08-06T00:31:08.956Z INFO webdriver: COMMAND performActions(<object>)
+2021-08-06T00:31:08.956Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/actions
+2021-08-06T00:31:08.956Z INFO webdriver: DATA {
+  actions: [
+    {
+      type: 'pointer',
+      id: 'finger1',
+      parameters: [Object],
+      actions: [Array]
+    }
+  ]
+}
+2021-08-06T00:31:08.979Z INFO webdriver: COMMAND releaseActions()
+2021-08-06T00:31:08.979Z INFO webdriver: [DELETE] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/actions
+2021-08-06T00:31:08.983Z INFO webdriver: COMMAND findElement("css selector", "#nav > ol > li.level0.nav-5.parent > ul > li.level1.view-all > a")
+2021-08-06T00:31:08.983Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:08.983Z INFO webdriver: DATA {
+  using: 'css selector',
+  value: '#nav > ol > li.level0.nav-5.parent > ul > li.level1.view-all > a'
+}
+2021-08-06T00:31:08.991Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '479b5c02-5fd5-4a03-929e-50355b55b280'
+}
+2021-08-06T00:31:08.995Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:08.995Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:08.995Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '479b5c02-5fd5-4a03-929e-50355b55b280',
+      ELEMENT: '479b5c02-5fd5-4a03-929e-50355b55b280'
+    }
+  ]
+}
+2021-08-06T00:31:09.004Z INFO webdriver: RESULT true
+2021-08-06T00:31:09.004Z INFO webdriver: COMMAND elementClick("479b5c02-5fd5-4a03-929e-50355b55b280")
+2021-08-06T00:31:09.004Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/479b5c02-5fd5-4a03-929e-50355b55b280/click
+2021-08-06T00:31:10.876Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:10.876Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:10.881Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:10.881Z INFO webdriver: COMMAND getTitle()
+2021-08-06T00:31:10.881Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/title
+2021-08-06T00:31:10.887Z INFO webdriver: RESULT Sale
+2021-08-06T00:31:10.888Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:10.888Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:10.893Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:10.894Z INFO webdriver: COMMAND findElement("css selector", "#narrow-by-list > dd:nth-child(24) > ol > li:nth-child(1) > a")
+2021-08-06T00:31:10.894Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:10.894Z INFO webdriver: DATA {
+  using: 'css selector',
+  value: '#narrow-by-list > dd:nth-child(24) > ol > li:nth-child(1) > a'
+}
+2021-08-06T00:31:10.908Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '07a846b8-c350-45a9-a7e9-7a284e9b9835'
+}
+2021-08-06T00:31:10.911Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:10.912Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:10.912Z INFO webdriver: DATA {
+  script: 'return (function (elem, options) {\n' +
+    '        elem.scrollIntoView(options);\n' +
+    '    }).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '07a846b8-c350-45a9-a7e9-7a284e9b9835',
+      ELEMENT: '07a846b8-c350-45a9-a7e9-7a284e9b9835'
+    },
+    true
+  ]
+}
+2021-08-06T00:31:10.932Z INFO webdriver: COMMAND findElement("css selector", "#narrow-by-list > dd:nth-child(24) > ol > li:nth-child(1) > a")
+2021-08-06T00:31:10.932Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:10.932Z INFO webdriver: DATA {
+  using: 'css selector',
+  value: '#narrow-by-list > dd:nth-child(24) > ol > li:nth-child(1) > a'
+}
+2021-08-06T00:31:10.941Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '07a846b8-c350-45a9-a7e9-7a284e9b9835'
+}
+2021-08-06T00:31:10.945Z INFO webdriver: COMMAND executeScript(<fn>, <object>)
+2021-08-06T00:31:10.947Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/execute/sync
+2021-08-06T00:31:10.947Z INFO webdriver: DATA {
+  script: 'return (function isElementDisplayed(element) {\n' +
+    '    function nodeIsElement(node) {\n' +
+    '        if (!node) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        switch (node.nodeType) {\n' +
+    '            case Node.ELEMENT_NODE:\n' +
+    '            case Node.DOCUMENT_NODE:\n' +
+    '            case Node.DOCUMENT_FRAGMENT_NODE:\n' +
+    '                return true;\n' +
+    '            default:\n' +
+    '                return false;\n' +
+    '        }\n' +
+    '    }\n' +
+    '    function parentElementForElement(element) {\n' +
+    '        if (!element) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        return enclosingNodeOrSelfMatchingPredicate(element.parentNode, nodeIsElement);\n' +
+    '    }\n' +
+    '    function enclosingNodeOrSelfMatchingPredicate(targetNode, predicate) {\n' +
+    '        for (let node = targetNode; node && node !== targetNode.ownerDocument; node = node.parentNode)\n' +
+    '            if (predicate(node)) {\n' +
+    '                return node;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function enclosingElementOrSelfMatchingPredicate(targetElement, predicate) {\n' +
+    '        for (let element = targetElement; element && element !== targetElement.ownerDocument; element = parentElementForElement(element))\n' +
+    '            if (predicate(element)) {\n' +
+    '                return element;\n' +
+    '            }\n' +
+    '        return null;\n' +
+    '    }\n' +
+    '    function cascadedStylePropertyForElement(element, property) {\n' +
+    '        if (!element || !property) {\n' +
+    '            return null;\n' +
+    '        }\n' +
+    '        // if document-fragment, skip it and use element.host instead. This happens\n' +
+    '        // when the element is inside a shadow root.\n' +
+    '        // window.getComputedStyle errors on document-fragment.\n' +
+    '        if (element instanceof DocumentFragment) {\n' +
+    '            element = element.host;\n' +
+    '        }\n' +
+    '        let computedStyle = window.getComputedStyle(element);\n' +
+    '        let computedStyleProperty = computedStyle.getPropertyValue(property);\n' +
+    "        if (computedStyleProperty && computedStyleProperty !== 'inherit') {\n" +
+    '            return computedStyleProperty;\n' +
+    '        }\n' +
+    "        // Ideally getPropertyValue would return the 'used' or 'actual' value, but\n" +
+    "        // it doesn't for legacy reasons. So we need to do our own poor man's cascade.\n" +
+    "        // Fall back to the first non-'inherit' value found in an ancestor.\n" +
+    "        // In any case, getPropertyValue will not return 'initial'.\n" +
+    '        // FIXME: will this incorrectly inherit non-inheritable CSS properties?\n' +
+    '        // I think all important non-inheritable properties (width, height, etc.)\n' +
+    '        // for our purposes here are specially resolved, so this may not be an issue.\n' +
+    '        // Specification is here: https://drafts.csswg.org/cssom/#resolved-values\n' +
+    '        let parentElement = parentElementForElement(element);\n' +
+    '        return cascadedStylePropertyForElement(parentElement, property);\n' +
+    '    }\n' +
+    '    function elementSubtreeHasNonZeroDimensions(element) {\n' +
+    '        let boundingBox = element.getBoundingClientRect();\n' +
+    '        if (boundingBox.width > 0 && boundingBox.height > 0) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        // Paths can have a zero width or height. Treat them as shown if the stroke width is positive.\n' +
+    "        if (element.tagName.toUpperCase() === 'PATH' && boundingBox.width + boundingBox.height > 0) {\n" +
+    "            let strokeWidth = cascadedStylePropertyForElement(element, 'stroke-width');\n" +
+    '            return !!strokeWidth && (parseInt(strokeWidth, 10) > 0);\n' +
+    '        }\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow === 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    "        // If the container's overflow is not hidden and it has zero size, consider the\n" +
+    '        // container to have non-zero dimensions if a child node has non-zero dimensions.\n' +
+    '        return Array.from(element.childNodes).some((childNode) => {\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (nodeIsElement(childNode)) {\n' +
+    '                return elementSubtreeHasNonZeroDimensions(childNode);\n' +
+    '            }\n' +
+    '            return false;\n' +
+    '        });\n' +
+    '    }\n' +
+    '    function elementOverflowsContainer(element) {\n' +
+    "        let cascadedOverflow = cascadedStylePropertyForElement(element, 'overflow');\n" +
+    "        if (cascadedOverflow !== 'hidden') {\n" +
+    '            return false;\n' +
+    '        }\n' +
+    '        // FIXME: this needs to take into account the scroll position of the element,\n' +
+    '        // the display modes of it and its ancestors, and the container it overflows.\n' +
+    "        // See Selenium's bot.dom.getOverflowState atom for an exhaustive list of edge cases.\n" +
+    '        return true;\n' +
+    '    }\n' +
+    '    function isElementSubtreeHiddenByOverflow(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!elementOverflowsContainer(element)) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (!element.childNodes.length) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    "        // This element's subtree is hidden by overflow if all child subtrees are as well.\n" +
+    '        return Array.from(element.childNodes).every((childNode) => {\n' +
+    '            // Returns true if the child node is overflowed or otherwise hidden.\n' +
+    "            // Base case: not an element, has zero size, scrolled out, or doesn't overflow container.\n" +
+    '            // Visibility of text nodes is controlled by parent\n' +
+    '            if (childNode.nodeType === Node.TEXT_NODE) {\n' +
+    '                return false;\n' +
+    '            }\n' +
+    '            if (!nodeIsElement(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            if (!elementSubtreeHasNonZeroDimensions(childNode)) {\n' +
+    '                return true;\n' +
+    '            }\n' +
+    '            // Recurse.\n' +
+    '            return isElementSubtreeHiddenByOverflow(childNode);\n' +
+    '        });\n' +
+    '    }\n' +
+    '    // walk up the tree testing for a shadow root\n' +
+    '    function isElementInsideShadowRoot(element) {\n' +
+    '        if (!element) {\n' +
+    '            return false;\n' +
+    '        }\n' +
+    '        if (element.parentNode && element.parentNode.host) {\n' +
+    '            return true;\n' +
+    '        }\n' +
+    '        return isElementInsideShadowRoot(element.parentNode);\n' +
+    '    }\n' +
+    `    // This is a partial reimplementation of Selenium's "element is displayed" algorithm.\n` +
+    "    // When the W3C specification's algorithm stabilizes, we should implement that.\n" +
+    '    // If this command is misdirected to the wrong document (and is NOT inside a shadow root), treat it as not shown.\n' +
+    '    if (!isElementInsideShadowRoot(element) && !document.contains(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    // Special cases for specific tag names.\n' +
+    '    switch (element.tagName.toUpperCase()) {\n' +
+    "        case 'BODY':\n" +
+    '            return true;\n' +
+    "        case 'SCRIPT':\n" +
+    "        case 'NOSCRIPT':\n" +
+    '            return false;\n' +
+    "        case 'OPTGROUP':\n" +
+    "        case 'OPTION': {\n" +
+    '            // Option/optgroup are considered shown if the containing <select> is shown.\n' +
+    "            let enclosingSelectElement = enclosingNodeOrSelfMatchingPredicate(element, (e) => e.tagName.toUpperCase() === 'SELECT');\n" +
+    '            return isElementDisplayed(enclosingSelectElement);\n' +
+    '        }\n' +
+    "        case 'INPUT':\n" +
+    '            // <input type="hidden"> is considered not shown.\n' +
+    "            if (element.type === 'hidden') {\n" +
+    '                return false;\n' +
+    '            }\n' +
+    '            break;\n' +
+    "        // case 'MAP':\n" +
+    "        // FIXME: Selenium has special handling for <map> elements. We don't do anything now.\n" +
+    '        default:\n' +
+    '            break;\n' +
+    '    }\n' +
+    "    if (cascadedStylePropertyForElement(element, 'visibility') !== 'visible') {\n" +
+    '        return false;\n' +
+    '    }\n' +
+    '    let hasAncestorWithZeroOpacity = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return Number(cascadedStylePropertyForElement(e, 'opacity')) === 0;\n" +
+    '    });\n' +
+    '    let hasAncestorWithDisplayNone = !!enclosingElementOrSelfMatchingPredicate(element, (e) => {\n' +
+    "        return cascadedStylePropertyForElement(e, 'display') === 'none';\n" +
+    '    });\n' +
+    '    if (hasAncestorWithZeroOpacity || hasAncestorWithDisplayNone) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (!elementSubtreeHasNonZeroDimensions(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    if (isElementSubtreeHiddenByOverflow(element)) {\n' +
+    '        return false;\n' +
+    '    }\n' +
+    '    return true;\n' +
+    '}).apply(null, arguments)',
+  args: [
+    {
+      'element-6066-11e4-a52e-4f735466cecf': '07a846b8-c350-45a9-a7e9-7a284e9b9835',
+      ELEMENT: '07a846b8-c350-45a9-a7e9-7a284e9b9835'
+    }
+  ]
+}
+2021-08-06T00:31:10.957Z INFO webdriver: RESULT true
+2021-08-06T00:31:10.957Z INFO webdriver: COMMAND elementClick("07a846b8-c350-45a9-a7e9-7a284e9b9835")
+2021-08-06T00:31:10.957Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/07a846b8-c350-45a9-a7e9-7a284e9b9835/click
+2021-08-06T00:31:12.626Z INFO webdriver: COMMAND getUrl()
+2021-08-06T00:31:12.626Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/url
+2021-08-06T00:31:12.634Z INFO webdriver: RESULT http://www.ctqatest.biz/ecom/sale.html?price=100-200
+2021-08-06T00:31:12.635Z INFO webdriver: COMMAND maximizeWindow()
+2021-08-06T00:31:12.635Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/window/maximize
+2021-08-06T00:31:12.640Z INFO webdriver: RESULT { height: 840, width: 1552, x: -8, y: -8 }
+2021-08-06T00:31:12.641Z INFO webdriver: COMMAND findElement("xpath", "//*[@id="top"]/body/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/ol/li/span[2]")
+2021-08-06T00:31:12.642Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element
+2021-08-06T00:31:12.642Z INFO webdriver: DATA {
+  using: 'xpath',
+  value: '//*[@id="top"]/body/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/ol/li/span[2]'
+}
+2021-08-06T00:31:12.661Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'e47302a2-9c7b-4013-aed7-848998fefb09'
+}
+2021-08-06T00:31:12.664Z INFO webdriver: COMMAND getElementText("e47302a2-9c7b-4013-aed7-848998fefb09")
+2021-08-06T00:31:12.664Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/element/e47302a2-9c7b-4013-aed7-848998fefb09/text
+2021-08-06T00:31:12.685Z INFO webdriver: RESULT $100.00 - $199.99
+2021-08-06T00:31:12.687Z INFO webdriver: COMMAND getLogTypes()
+2021-08-06T00:31:12.687Z INFO webdriver: [GET] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/se/log/types
+2021-08-06T00:31:12.690Z INFO webdriver: RESULT [ 'browser', 'driver' ]
+2021-08-06T00:31:12.690Z INFO webdriver: COMMAND getLogs("browser")
+2021-08-06T00:31:12.691Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/se/log
+2021-08-06T00:31:12.691Z INFO webdriver: DATA { type: 'browser' }
+2021-08-06T00:31:12.692Z INFO webdriver: COMMAND getLogs("driver")
+2021-08-06T00:31:12.692Z INFO webdriver: [POST] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756/se/log
+2021-08-06T00:31:12.692Z INFO webdriver: DATA { type: 'driver' }
+2021-08-06T00:31:12.696Z INFO webdriver: RESULT []
+2021-08-06T00:31:12.697Z INFO webdriver: RESULT []
+2021-08-06T00:31:12.698Z INFO webdriver: COMMAND deleteSession()
+2021-08-06T00:31:12.698Z INFO webdriver: [DELETE] http://localhost:9515/session/9f0718a8f4563cead2410a11dd202756

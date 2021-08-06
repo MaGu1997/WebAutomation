@@ -1,0 +1,7 @@
+2021-08-06T00:30:54.848Z INFO @wdio/cli:launcher: Run onPrepare hook
+2021-08-06T00:30:54.852Z INFO chromedriver: Start Chromedriver (C:\Users\manya\Desktop\Others\ContentSquare\Webdriver Automation\node_modules\chromedriver\lib\chromedriver\chromedriver.exe) with args --silent --port=9515 --url-base=/
+2021-08-06T00:30:55.956Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2021-08-06T00:30:55.961Z INFO @wdio/local-runner: Start worker 0-0 with arg: wdio.conf.js
+2021-08-06T00:31:12.894Z INFO @wdio/cli:launcher: Run onComplete hook
+2021-08-06T00:31:12.902Z INFO @wdio/local-runner: Shutting down spawned worker
+2021-08-06T00:31:13.153Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
